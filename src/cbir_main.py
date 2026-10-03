@@ -7,11 +7,10 @@ def main():
     print("==================================================")
     
     # 1. Path to your local dataset folder
-    # If you are in the src/ folder, we look for the data folder right next to it (at the root)
     DATASET_DIR = "../data"
     
     if not os.path.exists(DATASET_DIR):
-        DATASET_DIR = "./data"  # Fallback if executed from the root
+        DATASET_DIR = "./data"
         
     if not os.path.exists(DATASET_DIR):
         print(f"❌ ERROR: The folder '{DATASET_DIR}' could not be found.")
@@ -19,7 +18,7 @@ def main():
         return
     
     # 2. Configuration
-    NUM_IMAGES = 20  # You can increase this number later
+    NUM_IMAGES = 20 
     methods = ('couleur', 'texture', 'forme')  # Feature extraction methods
     
     # 3. Loading images (subfolders benign, malignant, normal are handled automatically)
