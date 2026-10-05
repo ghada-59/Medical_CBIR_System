@@ -88,14 +88,23 @@ class IndexeurCBIR:
         self.features_db = self.scaler.fit_transform(features_list)
         print(f"✅ Successful indexing ({len(images)} images indexed).")
 
-    def rechercher(self, image_requete, top_k=5, metrique='euclidienne', methodes=('couleur', 'texture', 'forme')):
+    def rechercher(
+    self,
+    image_requete,
+    top_k=5,
+    metrique='euclidienne',
+    methodes=('couleur', 'texture', 'forme'),
+    exclude_index=None
+):
         """Searches for the most similar images based on distance."""
         feat_req = self.extraire_caracteristiques(image_requete, methodes)
         feat_req_norm = self.scaler.transform([feat_req])[0]
         
         distances = []
         for i, feat_db in enumerate(self.features_db):
-            if metrique == 'euclidienne':
+            if exclude_index is not None and i == exclude_index:
+                continue
+            elif metrique == 'euclidienne':
                 dist = np.linalg.norm(feat_req_norm - feat_db)
             elif metrique == 'cosinus':
                 dot_product = np.dot(feat_req_norm, feat_db)
