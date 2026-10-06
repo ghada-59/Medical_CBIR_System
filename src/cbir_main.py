@@ -577,6 +577,20 @@ def main():
         )
 
         # -------------------------------------------------
+        # Retrieval visualization
+        # -------------------------------------------------
+
+        # Save one representative query and its Top-K results.
+        # This makes the retrieval output directly visible in the project.
+        if query_number == 1:
+
+            indexer.afficher_resultats(
+                query_image,
+                indices,
+                distances
+            )
+
+        # -------------------------------------------------
         # Metrics
         # -------------------------------------------------
 
@@ -859,6 +873,9 @@ def main():
 
     print(
         "  - metrics_summary.txt"
+    )
+    print(
+        "  - resultat_cbir.png"
     )
 
 
