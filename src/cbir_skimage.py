@@ -114,13 +114,13 @@ class IndexeurCBIR:
         self.images_db = None
         self.scaler = MinMaxScaler()
         
-    def extraire_caracteristiques(self, img, methodes=('couleur', 'texture', 'forme')):
-        """Extracts descriptors (Intensity Histogram, GLCM, Hu Moments)."""
+    def extraire_caracteristiques(self, img, methodes=('intensite', 'texture', 'forme')):
+        """Extract intensity, texture and shape descriptors."""
         descriptors = []
         img_uint8 = (img * 255).astype(np.uint8)
         
         # 1. Intensity histogram
-        if 'couleur' in methodes:
+        if 'intensite' in methodes:
             hist, _ = np.histogram(img_uint8, bins=32, range=(0, 256), density=True)
             descriptors.extend(hist)
             
@@ -215,7 +215,8 @@ class IndexeurCBIR:
         plt.tight_layout()
         
         # Automatic management of the reports folder at the project root
-        reports_dir = "../reports"
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        reports_dir = os.path.join(project_root, "reports")
         os.makedirs(reports_dir, exist_ok=True)
         
         file_path = os.path.join(reports_dir, "resultat_cbir.png")
