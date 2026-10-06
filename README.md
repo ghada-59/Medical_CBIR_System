@@ -6,7 +6,7 @@ The project explores how classical image descriptors can be used to represent me
 
 > **Academic scope:** This is an image-retrieval and similarity-search project. It is **not a clinical diagnostic system** and does not perform medical diagnosis.
 
-**Tech Stack:** Python · NumPy · scikit-image · scikit-learn · Matplotlib · OpenCV  
+**Tech Stack:** Python · NumPy · scikit-image · scikit-learn · Matplotlib  
 **Domain:** Medical Imaging · Computer Vision · Content-Based Image Retrieval (CBIR)
 
 ---
@@ -146,8 +146,8 @@ The evaluation script in **src/cbir_main.py** uses a balanced query set:
 |---|---|
 | Dataset | BUSI |
 | Classes | Benign, Malignant, Normal |
-| Query images | 30 |
-| Queries per class | 10 |
+| Query images | 90 |
+| Queries per class | 30 |
 | Retrieval database | Remaining BUSI images |
 | Retrieval size | Top-5 |
 | Distance metric | Euclidean |
@@ -168,26 +168,24 @@ These metrics evaluate **retrieval consistency**, not diagnostic performance.
 
 ## 📈 Results
 
-The current evaluation produced:
+The current evaluation uses **90 balanced queries (30 per class)**, with each query removed from the retrieval database.
 
 | Metric | Result |
 |---|---:|
-| **Mean Precision@1** | **66.7%** |
-| **Mean Precision@5** | **48.7%** |
+| **Mean Precision@1** | **65.56%** |
+| **Mean Precision@5** | **48.89%** |
 
 ### Results by BUSI class
 
 | Class | Precision@1 | Precision@5 |
 |---|---:|---:|
-| Benign | 70.0% | 60.0% |
-| Malignant | 60.0% | 44.0% |
-| Normal | 70.0% | 42.0% |
-
-The evaluation is based on **30 balanced queries (10 per class)**, with each query removed from the retrieval database.
+| Benign | 86.67% | 72.67% |
+| Malignant | 56.67% | 42.67% |
+| Normal | 53.33% | 31.33% |
 
 ### 🧠 Interpretation
 
-The **66.7% Precision@1** indicates that, for about two-thirds of the evaluated queries, the most similar retrieved image belongs to the same BUSI class as the query. The **48.7% Precision@5** shows that class consistency decreases when considering a larger retrieved neighborhood.
+The **65.56% Precision@1** indicates that, for roughly two-thirds of the evaluated queries, the most similar retrieved image belongs to the same BUSI class as the query. The **48.89% Precision@5** indicates that, when considering the five nearest retrieved images, fewer than half are from the same BUSI class on average.
 
 These results are interpreted as **retrieval performance**, not classification accuracy or diagnostic performance. The experiment also highlights how feature representation, similarity metrics and evaluation protocol can directly influence AI-based medical image retrieval results.
 
@@ -249,8 +247,6 @@ Contains the generated evaluation outputs and visual results.
 
 ---
 
----
-
 ## 🚀 Installation
 
 Clone the repository:
@@ -303,7 +299,7 @@ python cbir_main.py
 The script will:
 
 1. load the BUSI images;
-2. select 10 queries per class;
+2. select 30 queries per class;
 3. create a retrieval database from the remaining images;
 4. extract and normalize descriptors;
 5. retrieve the five nearest images for each query;
@@ -349,7 +345,7 @@ Visualization of a query image and retrieved similar images with their correspon
 This project is intentionally a **classical CBIR baseline** and has several limitations:
 
 - The feature representation is handcrafted rather than learned.
-- The evaluation uses a relatively small balanced query set of 30 images.
+- The evaluation uses a balanced query set of 90 images (30 per class).
 - Relevance is defined using BUSI dataset class labels, which does not mean that visual similarity corresponds to clinical similarity.
 - The descriptors are not validated clinical biomarkers.
 - No diagnostic conclusion should be drawn from the retrieved images.
