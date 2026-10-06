@@ -16,7 +16,7 @@ def charger_images_dossier(chemin_dossier, max_images=None, random_seed=42):
     Images are converted to grayscale and resized to 128x128.
 
     If max_images is None, all available images are loaded.
-    If max_images is specified, the same number of images is
+    If max_images is specified, up to that number of images is
     selected from each class.
 
     A fixed random seed ensures reproducible selection.
@@ -79,6 +79,8 @@ def charger_images_dossier(chemin_dossier, max_images=None, random_seed=42):
 
                 # Convert RGB/RGBA images to grayscale
                 if img.ndim == 3:
+                    if img.shape[-1] == 4:
+                        img = color.rgba2rgb(img)
                     img = color.rgb2gray(img)
 
                 # Resize to 128x128
@@ -101,7 +103,7 @@ def charger_images_dossier(chemin_dossier, max_images=None, random_seed=42):
             except Exception as e:
                 print(f"WARNING: Error loading {file}: {e}")
 
-    print("\nClass-balanced loading complete.")
+    print("\nImage loading complete.")
     print(f"Total images loaded: {len(images)}")
 
     return images, file_names
