@@ -155,7 +155,7 @@ def save_metrics_summary(
         )
 
         f.write(
-            "Queries per class: 30\n"
+            f"Queries per class: {QUERY_COUNT_PER_CLASS}\n"
         )
 
         f.write(
@@ -334,7 +334,7 @@ def main():
     TOP_K = 5
 
     # Number of queries selected from each BUSI class
-    QUERY_COUNT_PER_CLASS = 30
+    QUERY_COUNT_PER_CLASS = 10
 
     # -----------------------------------------------------
     # 3. Load images
