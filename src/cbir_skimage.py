@@ -4,34 +4,106 @@ from skimage import io, color, feature, measure, transform
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
-def charger_images_dossier(chemin_dossier, max_images=20):
+def charger_images_dossier(chemin_dossier, max_images=None, random_seed=42):
     """
-    Loads images from the dataset while ignoring masks (_mask)
-    and converts them to resized grayscale arrays.
+    Load BUSI ultrasound images from all three classes.
+
+    - benign
+    - malignant
+    - normal
+
+    Mask files (_mask) are ignored.
+    Images are converted to grayscale and resized to 128x128.
+
+    If max_images is None, all available images are loaded.
+    If max_images is specified, the same number of images is
+    selected from each class.
+
+    A fixed random seed ensures reproducible selection.
     """
+
+    import random
+
     images = []
     file_names = []
-    
-    for root, dirs, files in os.walk(chemin_dossier):
-        for file in files:
-            if file.lower().endswith(('.png', '.jpg', '.jpeg')) and '_mask' not in file.lower():
-                full_path = os.path.join(root, file)
-                try:
-                    img = io.imread(full_path)
-                    if img.ndim == 3:
-                        img = color.rgb2gray(img)
-                    # Uniform resizing
-                    img_resized = transform.resize(img, (128, 128), anti_aliasing=True)
-                    images.append(img_resized)
-                    
-                    rel_path = os.path.relpath(full_path, os.path.dirname(chemin_dossier))
-                    file_names.append(rel_path)
-                    
-                    if len(images) >= max_images:
-                        return images, file_names
-                except Exception as e:
-                    print(f"⚠️ Error loading {file}: {e}")
-                    
+
+    classes = ['benign', 'malignant', 'normal']
+
+    rng = random.Random(random_seed)
+
+    for class_name in classes:
+
+        class_dir = os.path.join(
+            chemin_dossier,
+            'breast-ultrasound-images-dataset',
+            'Dataset_BUSI_with_GT',
+            class_name
+        )
+
+        if not os.path.exists(class_dir):
+            print(f"WARNING: Class folder not found: {class_dir}")
+            continue
+
+        # Find real ultrasound images and ignore segmentation masks
+        class_images = [
+            file for file in os.listdir(class_dir)
+            if (
+                file.lower().endswith(('.png', '.jpg', '.jpeg'))
+                and '_mask' not in file.lower()
+            )
+        ]
+
+        # Sort first for reproducibility
+        class_images.sort()
+
+        # Shuffle with a fixed seed
+        rng.shuffle(class_images)
+
+        # Select images
+        if max_images is None:
+            selected_files = class_images
+        else:
+            selected_files = class_images[:min(max_images, len(class_images))]
+
+        print(
+            f"Loading class '{class_name}': "
+            f"{len(selected_files)} / {len(class_images)} images"
+        )
+
+        for file in selected_files:
+
+            full_path = os.path.join(class_dir, file)
+
+            try:
+                img = io.imread(full_path)
+
+                # Convert RGB/RGBA images to grayscale
+                if img.ndim == 3:
+                    img = color.rgb2gray(img)
+
+                # Resize to 128x128
+                img_resized = transform.resize(
+                    img,
+                    (128, 128),
+                    anti_aliasing=True
+                )
+
+                images.append(img_resized)
+
+                # Keep the class information in the path
+                rel_path = os.path.relpath(
+                    full_path,
+                    os.path.dirname(chemin_dossier)
+                )
+
+                file_names.append(rel_path)
+
+            except Exception as e:
+                print(f"WARNING: Error loading {file}: {e}")
+
+    print("\nClass-balanced loading complete.")
+    print(f"Total images loaded: {len(images)}")
+
     return images, file_names
 
 
@@ -95,7 +167,7 @@ class IndexeurCBIR:
     metrique='euclidienne',
     methodes=('couleur', 'texture', 'forme'),
     exclude_index=None
-):
+    ):
         """Searches for the most similar images based on distance."""
         feat_req = self.extraire_caracteristiques(image_requete, methodes)
         feat_req_norm = self.scaler.transform([feat_req])[0]
@@ -104,7 +176,7 @@ class IndexeurCBIR:
         for i, feat_db in enumerate(self.features_db):
             if exclude_index is not None and i == exclude_index:
                 continue
-            elif metrique == 'euclidienne':
+            if metrique == 'euclidienne':
                 dist = np.linalg.norm(feat_req_norm - feat_db)
             elif metrique == 'cosinus':
                 dot_product = np.dot(feat_req_norm, feat_db)

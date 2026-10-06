@@ -1,0 +1,167 @@
+BUSI MEDICAL CBIR EVALUATION
+============================================================
+
+Evaluation protocol:
+- Query image excluded from retrieval results
+- Relevance defined by matching BUSI class
+- Metrics: Precision@1 and Precision@5
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (1).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.8000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (108).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (117).png
+Class: benign
+Precision@1: 0.0000
+Precision@5: 0.4000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (126).png
+Class: benign
+Precision@1: 0.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (135).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.8000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (144).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.8000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (153).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (162).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (171).png
+Class: benign
+Precision@1: 1.0000
+Precision@5: 0.4000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\benign\benign (180).png
+Class: benign
+Precision@1: 0.0000
+Precision@5: 0.4000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (1).png
+Class: malignant
+Precision@1: 1.0000
+Precision@5: 0.4000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (108).png
+Class: malignant
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (117).png
+Class: malignant
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (126).png
+Class: malignant
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (135).png
+Class: malignant
+Precision@1: 1.0000
+Precision@5: 0.8000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (144).png
+Class: malignant
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (153).png
+Class: malignant
+Precision@1: 1.0000
+Precision@5: 1.0000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (162).png
+Class: malignant
+Precision@1: 1.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (171).png
+Class: malignant
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\malignant\malignant (180).png
+Class: malignant
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (1).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (108).png
+Class: normal
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (117).png
+Class: normal
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (126).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (15).png
+Class: normal
+Precision@1: 0.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (24).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.2000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (33).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.6000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (42).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.8000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (51).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.4000
+
+Query: data\breast-ultrasound-images-dataset\Dataset_BUSI_with_GT\normal\normal (60).png
+Class: normal
+Precision@1: 1.0000
+Precision@5: 0.4000
+
+============================================================
+Mean Precision@1: 0.6667
+Mean Precision@5: 0.4867
+
+RESULTS BY CLASS
+------------------------------------------------------------
+benign: Precision@1=0.7000, Precision@5=0.6000
+malignant: Precision@1=0.6000, Precision@5=0.4400
+normal: Precision@1=0.7000, Precision@5=0.4200
