@@ -7,6 +7,9 @@ import random
 RANDOM_SEED = 42
 random.seed(RANDOM_SEED)
 
+# Number of evaluation queries sampled from each BUSI class
+QUERY_COUNT_PER_CLASS = 30
+
 from cbir_skimage import charger_images_dossier, IndexeurCBIR
 
 
@@ -334,7 +337,6 @@ def main():
     TOP_K = 5
 
     # Number of queries selected from each BUSI class
-    QUERY_COUNT_PER_CLASS = 30
 
     # -----------------------------------------------------
     # 3. Load images
