@@ -7,6 +7,10 @@ import random
 RANDOM_SEED = 42
 random.seed(RANDOM_SEED)
 
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..")
+)
+
 # Number of evaluation queries sampled from each BUSI class
 QUERY_COUNT_PER_CLASS = 30
 
@@ -107,7 +111,7 @@ def save_metrics_summary(
     Save a concise and professional CBIR evaluation summary.
     """
 
-    reports_dir = "../reports"
+    reports_dir = os.path.join(PROJECT_ROOT, "reports")
 
     os.makedirs(
         reports_dir,
@@ -306,13 +310,9 @@ def main():
     # 1. Dataset path
     # -----------------------------------------------------
 
-    DATASET_DIR = "../data"
+    DATASET_DIR = os.path.join(PROJECT_ROOT, "data")
 
-    if not os.path.exists(DATASET_DIR):
-
-        DATASET_DIR = "./data"
-
-    if not os.path.exists(DATASET_DIR):
+    if not os.path.isdir(DATASET_DIR):
 
         print(
             f"ERROR: Dataset folder not found: "
@@ -329,14 +329,14 @@ def main():
     NUM_IMAGES = None
 
     methods = (
-        "couleur",
+        "intensite",
         "texture",
         "forme"
     )
 
     TOP_K = 5
 
-    # Number of queries selected from each BUSI class
+    # Number of queries selected from each BUSI class is defined above.
 
     # -----------------------------------------------------
     # 3. Load images
