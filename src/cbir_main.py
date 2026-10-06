@@ -334,7 +334,7 @@ def main():
     TOP_K = 5
 
     # Number of queries selected from each BUSI class
-    QUERY_COUNT_PER_CLASS = 10
+    QUERY_COUNT_PER_CLASS = 30
 
     # -----------------------------------------------------
     # 3. Load images
