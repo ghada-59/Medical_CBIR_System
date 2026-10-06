@@ -13,7 +13,7 @@ The project explores how classical image descriptors can be used to represent me
 
 ## 🎯 Project Objective
 
-The objective is to build and evaluate a reproducible CBIR pipeline that:
+The objective is to build and evaluate a reproducible evaluation setup that:
 
 - loads breast ultrasound images from the BUSI dataset;
 - preprocesses images into a consistent representation;
@@ -266,7 +266,7 @@ pip install -r requirements.txt
 
 The BUSI dataset is required locally but is intentionally **not included in this repository**.
 
-The repository's **.gitignore** excludes the dataset directories to avoid committing large dataset files.
+The repository's **.gitignore** excludes the local dataset directory to avoid committing large dataset files.
 
 The dataset can be obtained from the Kaggle source used by the project:
 
@@ -340,7 +340,7 @@ Visual comparison of Precision@1 and Precision@5 across:
 - malignant
 - normal
 
-> **Note:** The current evaluation script does not automatically generate a per-query visualization. The retrieval visualization helper remains available in `IndexeurCBIR.afficher_resultats()` for optional use.
+> **Note:** The evaluation script automatically saves one representative retrieval visualization for the first query. The helper `IndexeurCBIR.afficher_resultats()` can also be reused for additional queries.
 
 ---
 
