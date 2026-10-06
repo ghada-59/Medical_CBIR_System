@@ -1,5 +1,4 @@
 data/
-breast-ultrasound-images-dataset/
 .venv/
 __pycache__/
 *.pyc
