@@ -204,7 +204,8 @@ Medical_CBIR_System/
 │
 ├── reports/
 │   ├── metrics_summary.txt
-│   └── precision_by_class.png
+│   ├── precision_by_class.png
+│   └── resultat_cbir.png
 │
 ├── .gitignore
 ├── README.md
