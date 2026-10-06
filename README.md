@@ -204,8 +204,7 @@ Medical_CBIR_System/
 │
 ├── reports/
 │   ├── metrics_summary.txt
-│   ├── precision_by_class.png
-│   └── resultat_cbir.png
+│   └── precision_by_class.png
 │
 ├── .gitignore
 ├── README.md
@@ -304,7 +303,13 @@ The script will:
 4. extract and normalize descriptors;
 5. retrieve the five nearest images for each query;
 6. calculate Precision@1 and Precision@5;
-7. generate evaluation reports.
+7. generate the evaluation reports.
+
+The optional dataset helper can be run from the project root with:
+
+~~~bash
+python src/telecharger_data.py
+~~~
 
 Generated outputs are saved under:
 
@@ -334,9 +339,7 @@ Visual comparison of Precision@1 and Precision@5 across:
 - malignant
 - normal
 
-### resultat_cbir.png
-
-Visualization of a query image and retrieved similar images with their corresponding distances.
+> **Note:** The current evaluation script does not automatically generate a per-query visualization. The retrieval visualization helper remains available in `IndexeurCBIR.afficher_resultats()` for optional use.
 
 ---
 
