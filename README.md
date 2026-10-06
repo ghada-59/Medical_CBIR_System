@@ -6,6 +6,9 @@ The project explores how classical image descriptors can be used to represent me
 
 > **Academic scope:** This is an image-retrieval and similarity-search project. It is **not a clinical diagnostic system** and does not perform medical diagnosis.
 
+**Tech Stack:** Python · NumPy · scikit-image · scikit-learn · Matplotlib · OpenCV  
+**Domain:** Medical Imaging · Computer Vision · Content-Based Image Retrieval (CBIR)
+
 ---
 
 ## 🎯 Project Objective
@@ -244,29 +247,6 @@ Provides an optional helper for downloading the BUSI dataset from Kaggle using *
 Contains the generated evaluation outputs and visual results.
 
 ---
-
-## 🛠️ Technologies
-
-- **Python**
-- **NumPy**
-- **scikit-image**
-- **scikit-learn**
-- **Matplotlib**
-- **OpenCV**
-- **Kaggle dataset tooling**
-
-### Main technical concepts
-
-- Medical image preprocessing
-- Content-Based Image Retrieval (CBIR)
-- Feature engineering
-- Intensity histograms
-- GLCM texture analysis
-- Hu moments
-- Feature normalization
-- Euclidean and cosine similarity
-- Precision@K evaluation
-- Reproducible experiments
 
 ---
 
