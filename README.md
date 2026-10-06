@@ -185,11 +185,12 @@ The current evaluation produced:
 
 The evaluation is based on **30 balanced queries (10 per class)**, with each query removed from the retrieval database.
 
-### Interpretation
+### 🧠 Interpretation
 
-The results show that the handcrafted feature representation can retrieve images sharing the query's BUSI class with moderate consistency.
+The **66.7% Precision@1** indicates that, for about two-thirds of the evaluated queries, the most similar retrieved image belongs to the same BUSI class as the query. The **48.7% Precision@5** shows that class consistency decreases when considering a larger retrieved neighborhood.
 
-The difference between Precision@1 and Precision@5 also illustrates that the quality of the retrieved neighborhood can vary across queries. This provides a useful baseline for future experimentation with improved feature representations or learned embeddings.
+These results are interpreted as **retrieval performance**, not classification accuracy or diagnostic performance. The experiment also highlights how feature representation, similarity metrics and evaluation protocol can directly influence AI-based medical image retrieval results.
+
 
 ---
 
