@@ -119,7 +119,7 @@ class IndexeurCBIR:
         descriptors = []
         img_uint8 = (img * 255).astype(np.uint8)
         
-        # 1. Color (Intensity Histogram)
+        # 1. Intensity histogram
         if 'couleur' in methodes:
             hist, _ = np.histogram(img_uint8, bins=32, range=(0, 256), density=True)
             descriptors.extend(hist)
