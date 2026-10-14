@@ -1,0 +1,7 @@
+# Install from the repository root with:
+# python -m pip install -r requirements-react-api.txt
+-r requirements.txt
+fastapi>=0.115
+uvicorn[standard]>=0.32
+python-multipart>=0.0.12
+Pillow>=10.0
