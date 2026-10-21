@@ -15,12 +15,7 @@ PROJECT_ROOT = os.path.abspath(
 QUERY_COUNT_PER_CLASS = 30
 
 from cbir_skimage import charger_images_dossier, IndexeurCBIR
-
-
-# ---------------------------------------------------------
 # Utility functions
-# ---------------------------------------------------------
-
 def get_class_from_path(file_path):
     """
     Extract BUSI class from the relative file path.
@@ -100,7 +95,6 @@ def precision_at_k(
 
 
 def save_metrics_summary(
-    results,
     mean_p1,
     mean_p5,
     class_results,
@@ -136,11 +130,7 @@ def save_metrics_summary(
         f.write(
             "=" * 60 + "\n\n"
         )
-
-        # -------------------------------------------------
         # Evaluation setup
-        # -------------------------------------------------
-
         f.write(
             "EVALUATION SETUP\n"
         )
@@ -192,11 +182,7 @@ def save_metrics_summary(
         f.write(
             "Relevance criterion: same BUSI class as the query\n\n"
         )
-
-        # -------------------------------------------------
         # Global results
-        # -------------------------------------------------
-
         f.write(
             "GLOBAL RESULTS\n"
         )
@@ -212,11 +198,7 @@ def save_metrics_summary(
         f.write(
             f"Mean Precision@5: {mean_p5:.4f}\n\n"
         )
-
-        # -------------------------------------------------
         # Results by class
-        # -------------------------------------------------
-
         f.write(
             "RESULTS BY CLASS\n"
         )
@@ -252,11 +234,7 @@ def save_metrics_summary(
             )
 
         f.write("\n")
-
-        # -------------------------------------------------
         # Interpretation
-        # -------------------------------------------------
-
         f.write(
             "INTERPRETATION\n"
         )
@@ -293,11 +271,7 @@ def save_metrics_summary(
     print(
         f"\nMetrics summary saved to: {output_file}"
     )
-
-# ---------------------------------------------------------
 # Main evaluation
-# ---------------------------------------------------------
-
 def main():
 
     print("=" * 70)
@@ -305,11 +279,7 @@ def main():
         "       BUSI MEDICAL CBIR EVALUATION"
     )
     print("=" * 70)
-
-    # -----------------------------------------------------
     # 1. Dataset path
-    # -----------------------------------------------------
-
     DATASET_DIR = os.path.join(PROJECT_ROOT, "data")
 
     if not os.path.isdir(DATASET_DIR):
@@ -320,11 +290,7 @@ def main():
         )
 
         return
-
-    # -----------------------------------------------------
     # 2. Configuration
-    # -----------------------------------------------------
-
     # None = load all available BUSI images
     NUM_IMAGES = None
 
@@ -337,11 +303,7 @@ def main():
     TOP_K = 5
 
     # Number of queries selected from each BUSI class is defined above.
-
-    # -----------------------------------------------------
     # 3. Load images
-    # -----------------------------------------------------
-
     print("\nLoading BUSI images...")
 
     images, file_names = charger_images_dossier(
@@ -361,11 +323,7 @@ def main():
     print(
         f"Images loaded: {len(images)}"
     )
-
-    # -----------------------------------------------------
     # 4. Show class distribution
-    # -----------------------------------------------------
-
     class_counts = {
         "benign": 0,
         "malignant": 0,
@@ -390,11 +348,7 @@ def main():
             print(
                 f"  {class_name}: {count}"
             )
-
-    # -----------------------------------------------------
     # 5. Select balanced queries
-    # -----------------------------------------------------
-
     QUERY_INDICES = []
 
     class_query_count = {
@@ -449,11 +403,7 @@ def main():
         f"  Total queries: "
         f"{len(QUERY_INDICES)}"
     )
-
-    # -----------------------------------------------------
     # 6. Build database
-    # -----------------------------------------------------
-
     print(
         "\nBuilding retrieval database..."
     )
@@ -500,11 +450,7 @@ def main():
         )
 
         return
-
-    # -----------------------------------------------------
     # 7. Index database
-    # -----------------------------------------------------
-
     print(
         "\nExtracting features and indexing..."
     )
@@ -516,11 +462,7 @@ def main():
         database_file_names,
         methodes=methods
     )
-
-    # -----------------------------------------------------
     # 8. Evaluation
-    # -----------------------------------------------------
-
     results = []
 
     for query_number, query_index in enumerate(
@@ -552,22 +494,14 @@ def main():
             f"{len(QUERY_INDICES)}: "
             f"{query_name}"
         )
-
-        # -------------------------------------------------
         # Search in DATABASE ONLY
-        # -------------------------------------------------
-
         indices, distances = indexer.rechercher(
             query_image,
             top_k=TOP_K,
             metrique="euclidienne",
             methodes=methods
         )
-
-        # -------------------------------------------------
         # Print retrieved images
-        # -------------------------------------------------
-
         print_query_results(
             query_name,
             query_class,
@@ -575,11 +509,7 @@ def main():
             indices,
             distances
         )
-
-        # -------------------------------------------------
         # Retrieval visualization
-        # -------------------------------------------------
-
         # Save one representative query and its Top-K results.
         # This makes the retrieval output directly visible in the project.
         if query_number == 1:
@@ -589,11 +519,7 @@ def main():
                 indices,
                 distances
             )
-
-        # -------------------------------------------------
         # Metrics
-        # -------------------------------------------------
-
         p1 = precision_at_k(
             query_class,
             database_file_names,
@@ -626,11 +552,7 @@ def main():
                 "precision_at_5": p5
             }
         )
-
-    # -----------------------------------------------------
     # 9. Global metrics
-    # -----------------------------------------------------
-
     if len(results) == 0:
 
         print(
@@ -674,11 +596,7 @@ def main():
         f"Mean Precision@5 = "
         f"{mean_p5:.4f}"
     )
-
-    # -----------------------------------------------------
     # 10. Results by class
-    # -----------------------------------------------------
-
     class_results = {
         "benign": [],
         "malignant": [],
@@ -741,23 +659,14 @@ def main():
             f"P@1={p1:.4f}, "
             f"P@5={p5:.4f}"
         )
-
-    # -----------------------------------------------------
     # 11. Reports directory
-    # -----------------------------------------------------
-
-    reports_dir = "../reports"
+    reports_dir = os.path.join(PROJECT_ROOT, "reports")
 
     os.makedirs(
         reports_dir,
         exist_ok=True
     )
-
-    
-    # -----------------------------------------------------
     # 12. Graph - Precision by class
-    # -----------------------------------------------------
-
     available_classes = list(
         class_p1.keys()
     )
@@ -829,24 +738,15 @@ def main():
         )
 
         plt.close()
-
-    # -----------------------------------------------------
     # 13. Save metrics
-    # -----------------------------------------------------
-
     save_metrics_summary(
-        results,
         mean_p1,
         mean_p5,
         class_results,
         database_size=len(database_images),
         query_size=len(QUERY_INDICES)
     )
-
-    # -----------------------------------------------------
     # 14. Final message
-    # -----------------------------------------------------
-
     print(
         "\n" + "=" * 70
     )
